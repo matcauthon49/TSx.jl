@@ -14,7 +14,7 @@ ts_monthly = toperiod(ts_daily, Dates.Month, first)
 @test ts_monthly.coredata[1, :Index] == df_timetype_index[1, :Index]
 
 # yearly
-@test_broken ts_yearly = toperiod(ts_daily_matrix, Dates.Year, Statistics.mean)
+ts_yearly = toperiod(ts_daily_matrix, Dates.Year, Statistics.mean)
 @test typeof(ts_yearly) == TSx.TS
 @test typeof(ts_yearly.coredata) == DataFrame
 @test DataFrames.nrow(ts_yearly.coredata) == 1
