@@ -333,7 +333,7 @@ function names(ts::TS)
 end
 
 # convert to period
-function toperiod(ts::TS, period::T, fun::V) where {T<:Dates.Period, V<:Function}
+function toperiod(ts::TS, period, fun::V) where {V<:Function}
     adf = transform(ts.coredata, :Index => (i -> Dates.floor.(i, period)) => :Index)
     gb = groupby(adf, :Index)
     TS(combine(gb, names(adf[!, Not(:Index)]) .=> [fun]))
